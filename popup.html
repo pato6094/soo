@@ -133,85 +133,6 @@
           <span class="title">Text Summarizer</span>
 
           <div class="header__buttons">
-            <div class="model-select__wrapper">
-              <select id="modelSelect" class="select-lang">
-                <option class="option" value="gpt-3.5-turbo" selected>
-                  GPT 3.5
-                </option>
-                <option class="option" value="gpt-4">GPT 4</option>
-              </select>
-            </div>
-            <div id="keyInputContainer" class="api-key__container">
-              <div class="api-key__title">
-                <p class="api-key-options__title">To use GPT 4:</p>
-                <button
-                  id="btnCloseInputContainer"
-                  class="input-container__btn-close"
-                >
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M32.543 30.3848L22.1531 20.0006L32.543 9.69285C33.0637 9.08979 33.0355 8.1848 32.4783 7.61578C31.9211 7.04676 31.0227 7.00555 30.4165 7.52119L19.9962 17.7525L9.75818 7.44472C9.16572 6.85176 8.20887 6.85176 7.6164 7.44472C7.32884 7.73188 7.16709 8.12277 7.16709 8.53055C7.16709 8.93833 7.32884 9.32922 7.6164 9.61638L17.8392 19.9088L7.44931 30.2013C7.16175 30.4884 7 30.8793 7 31.2871C7 31.6949 7.16175 32.0858 7.44931 32.3729C7.73598 32.6592 8.12405 32.8188 8.5278 32.8165C8.92414 32.8189 9.30572 32.6652 9.59109 32.3882L19.9962 22.0652L30.4165 32.5565C30.7031 32.8427 31.0912 33.0023 31.4949 33C31.8934 32.9983 32.2753 32.839 32.5582 32.5565C32.8438 32.2673 33.0028 31.8752 33 31.4674C32.9971 31.0597 32.8326 30.6699 32.543 30.3848Z"
-                      fill="#8E8E93"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <div class="login-api-key">
-                <p class="api-key__text">
-                  1. Login to OpenAI
-                  <a
-                    href="https://platform.openai.com/api-keys"
-                    target="_blank"
-                    class="api-key__text api-key__text-link"
-                    >API key page</a
-                  >
-                </p>
-                <p class="api-key__text">
-                  2. Click "Create new secret key" button
-                </p>
-                <p class="api-key__text">3. Enter the generated key below</p>
-              </div>
-              <div class="input-key">
-                <input
-                  type="text"
-                  id="openAIApiKey"
-                  class="openai-api-key"
-                  placeholder="API Key"
-                />
-              </div>
-              <div class="api-key__save-wrapper">
-                <button id="saveKeyBtn" class="api-key__btn-save">
-                  Save API Key
-                </button>
-              </div>
-            </div>
-
-            <a
-              href="https://onlineapp.pro/paywall/581/customer-portal/get"
-              target="_blank"
-              title="Manage subscription"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                style="display: block"
-              >
-                <path
-                  d="M5.85 17.1C6.7 16.45 7.65 15.9375 8.7 15.5625C9.75 15.1875 10.85 15 12 15C13.15 15 14.25 15.1875 15.3 15.5625C16.35 15.9375 17.3 16.45 18.15 17.1C18.7333 16.4167 19.1875 15.6417 19.5125 14.775C19.8375 13.9083 20 12.9833 20 12C20 9.78333 19.2208 7.89583 17.6625 6.3375C16.1042 4.77917 14.2167 4 12 4C9.78333 4 7.89583 4.77917 6.3375 6.3375C4.77917 7.89583 4 9.78333 4 12C4 12.9833 4.1625 13.9083 4.4875 14.775C4.8125 15.6417 5.26667 16.4167 5.85 17.1ZM12 13C11.0167 13 10.1875 12.6625 9.5125 11.9875C8.8375 11.3125 8.5 10.4833 8.5 9.5C8.5 8.51667 8.8375 7.6875 9.5125 7.0125C10.1875 6.3375 11.0167 6 12 6C12.9833 6 13.8125 6.3375 14.4875 7.0125C15.1625 7.6875 15.5 8.51667 15.5 9.5C15.5 10.4833 15.1625 11.3125 14.4875 11.9875C13.8125 12.6625 12.9833 13 12 13ZM12 22C10.6167 22 9.31667 21.7375 8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22Z"
-                  fill="white"
-                />
-              </svg>
-            </a>
-
             <div class="btn-close__wrapper">
               <button id="btnPopupClose" class="popup-close">
                 <svg
@@ -517,6 +438,17 @@
               </svg>
             </button>
           </div>
+        </div>
+      </section>
+      <section id="toneSection" class="tone__section">
+        <div class="tone__label">
+          <p class="tone__text">Livello di spiegazione:</p>
+        </div>
+        <div class="tone__wrapper">
+          <select id="toneSelect" class="tone-select">
+            <option value="facile" selected>Facile</option>
+            <option value="approfondito">Approfondito</option>
+          </select>
         </div>
       </section>
       <section id="summaryLengthSection" class="summary-length__section">

@@ -15,11 +15,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       );
     } else {
       const pageContent = document.body.innerText;
-      //pageContent.length <= maxLength
       chrome.runtime.sendMessage({
         action: "getSummary",
         pageContent: pageContent,
         input_type: "page",
+        tone: request.tone || "facile",
       });
     }
   }

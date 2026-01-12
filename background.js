@@ -17,6 +17,7 @@ async function setupDefaultSettings() {
   await saveDefaultIfNotExists("uniqueUserId", await generateUniqueId());
   await saveDefaultIfNotExists("userPreferredEngine", "gpt-3.5-turbo");
   await saveDefaultIfNotExists("summaryLength", 5);
+  await saveDefaultIfNotExists("userPreferredTone", "facile");
 }
 
 async function saveDefaultIfNotExists(settingKey, defaultValue) {
@@ -321,7 +322,8 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     request.action === "getSummaryArticle"
   ) {
     const settings = await getSettings();
-    sendSummary(request.pageContent, request.input_type, settings);
+    const tone = request.tone || "facile";
+    sendSummary(request.pageContent, request.input_type, settings, tone);
   }
   if (request.action === "translateText") {
     fetchTranslation(request.text, request.language);
@@ -382,6 +384,7 @@ async function getSettings() {
     "uniqueUserId",
     "userPreferredEngine",
     "summaryLength",
+    "userPreferredTone",
   ];
   let result = {};
   try {
@@ -411,17 +414,17 @@ async function getSettings() {
   return {
     apiKey: result.apiKey || null,
     uniqueUserID: result.uniqueUserId,
-    userPreferredEngine: result.userPreferredEngine || "gpt-3.5-turbo",
+    userPreferredEngine: "gpt-3.5-turbo",
     summaryLength: result.summaryLength,
+    userPreferredTone: result.userPreferredTone || "facile",
     activeTabURL: await getActiveTabURL(),
   };
 }
 
-async function sendSummary(pageContent, inputType, settings) {
+async function sendSummary(pageContent, inputType, settings, tone) {
   let currentFreeRequestCount = await incrementRequestCount();
 
   if (currentFreeRequestCount > FREE_REQUESTS_LIMIT) {
-    // Если пейвол зависнет, мы просто продолжим работу.
     triggerPaywallOpen()
       .then((success) => {
         if (!success) {
@@ -441,8 +444,9 @@ async function sendSummary(pageContent, inputType, settings) {
     content: pageContent,
     input_type: inputType,
     user: settings.uniqueUserID,
-    engine: settings.userPreferredEngine,
+    engine: "gpt-3.5-turbo",
     length: settings.summaryLength,
+    tone: tone || settings.userPreferredTone || "facile",
   };
 
   if (settings.apiKey) {
@@ -464,7 +468,6 @@ async function sendSummary(pageContent, inputType, settings) {
     console.warn("User info not available or timed out.");
   }
 
-  // Отправляем данные через WebSocket
   setupWebSocket(dataToSend);
 }
 // function sendSummary(pageContent, inputType, settings) {

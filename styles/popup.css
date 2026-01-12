@@ -875,6 +875,78 @@ form {
   transform: translateX(-90%);
   margin-left: 0px;
 }
+/*---------tone select------*/
+.tone__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.tone__label {
+  display: flex;
+  justify-content: center;
+}
+
+.tone__text {
+  color: var(--grey3);
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.tone__wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tone__wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.tone-select {
+  width: 150px;
+  height: 36px;
+  background: url("../icons/dropdown-arrow.svg") no-repeat right 16px center;
+  background-color: var(--Text-Summarizer-Main-Page-500);
+  color: var(--Text-Summarizer-Main-Page-50);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.014px;
+  text-overflow: ellipsis;
+  border-radius: 48px;
+  border: none;
+  padding-left: 24px;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.tone-select:hover {
+  background-color: var(--Text-Summarizer-Main-Page-600);
+}
+
+.tone-select:focus {
+  outline: none;
+}
+
+.tone-select option {
+  background-color: var(--Text-Summarizer-Main-Page-500);
+  color: var(--Text-Summarizer-Main-Page-50);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  padding: 5px;
+}
+
 /*---------summary length------*/
 .summary-length__section {
   display: flex;

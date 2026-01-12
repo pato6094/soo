@@ -34,11 +34,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   const ratingWrapper = document.querySelector(".rating__wrapper");
   const ratingPositiveAnswer = document.getElementById("ratingPositiveAnswer");
   const ratingNegativeAnswer = document.getElementById("ratingNegativeAnswer");
-  //--api key
-  const modelSelect = document.getElementById("modelSelect");
-  const keyInputContainer = document.getElementById("keyInputContainer");
-  const openAIApiKey = document.getElementById("openAIApiKey");
-  const saveKeyBtn = document.getElementById("saveKeyBtn");
+  //-----tone-----------
+  const toneSelect = document.getElementById("toneSelect");
+  const toneSection = document.getElementById("toneSection");
   //-----translate-----------
   const summaryLengthSection = document.querySelector(
     ".summary-length__section"
@@ -50,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   let summaryReceived = false;
   let isSpeaking = false;
-  await initializeModelSelect();
+  await initializeToneSelect();
   await showRatingBlockIfNeeded();
   //----------------showRating -----------------
 
@@ -215,13 +213,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   btnClearArticle.addEventListener("click", clearArticleInput);
 
-  function submitArticle() {
+  async function submitArticle() {
     const copiedText = articleInput.value.trim();
     if (copiedText) {
+      const selectedTone = await getTonePreference();
       chrome.runtime.sendMessage({
         action: "getSummaryArticle",
         pageContent: copiedText,
         input_type: "text",
+        tone: selectedTone,
       });
       pendingResponse();
       sectionButtons.style.display = "none";
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   getSummaryButton.addEventListener("click", async function () {
     try {
       pendingResponse();
-      getSummaryButton.style.backgroundColor = "#8E8E93"; // серый
+      getSummaryButton.style.backgroundColor = "#8E8E93";
       getSummaryButton.disabled = true;
       sectionArticle.style.display = "none";
       pretextOr.style.display = "none";
@@ -255,8 +255,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
 
+      const selectedTone = await getTonePreference();
       await chrome.tabs.sendMessage(tab.id, {
         action: "getSummaryAllPage",
+        tone: selectedTone,
       });
       incrementAnswersReceived();
     } catch (error) {
@@ -535,6 +537,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     pretextOr.style.display = "flex";
     isSummaryTextareaVisible = false;
     summaryLengthSection.style.display = "flex";
+    toneSection.style.display = "flex";
     clearArticleInput();
     chrome.tts.stop();
     // Показать блок рейтинга, если необходимо
@@ -542,111 +545,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     sectionFunctionalityButtons.style.display = "none";
   });
 
-  //------------keyInputContainer----------
+  //------------tone select----------
 
-  async function shouldShowKeyInput(selectedModel) {
-    const previousModel = await new Promise((resolve, reject) => {
-      chrome.storage.local.get(["previousEngine"], function (result) {
-        if (chrome.runtime.lastError) {
-          reject(chrome.runtime.lastError);
-        } else {
-          resolve(result.previousEngine || "gpt-3.5-turbo");
-        }
-      });
-    });
-
-    await new Promise((resolve, reject) => {
-      chrome.storage.local.set({ previousEngine: selectedModel }, () => {
-        if (chrome.runtime.lastError) {
-          reject(chrome.runtime.lastError);
-        } else {
-          resolve();
-        }
-      });
-    });
-
-    return selectedModel === "gpt-4" && previousModel !== "gpt-4";
-  }
-  // async function shouldShowKeyInput(selectedModel) {
-  //   return selectedModel === "gpt-4"; // Показывать окно, если выбран gpt-4
-  // }
-  modelSelect.addEventListener("change", async () => {
-    const selectedModel = modelSelect.value;
-    const isShowKeyInput = await shouldShowKeyInput(selectedModel);
-
-    if (isShowKeyInput) {
-      await showKeyInput();
-    } else {
-      hideKeyInput();
-    }
-
-    await saveModelPreference(selectedModel);
-  });
-
-  saveKeyBtn.addEventListener("click", async () => {
-    try {
-      const apiKeyValue = openAIApiKey.value;
-      await saveApiKey(apiKeyValue);
-      const selectedModel = apiKeyValue ? "gpt-4" : "gpt-3.5-turbo";
-      await saveModelPreference(selectedModel);
-      modelSelect.value = selectedModel;
-      hideKeyInput();
-    } catch (error) {
-      console.error("Error when saving OpenAI APIKey:", error);
-    }
-  });
-  async function getApiKey() {
-    try {
-      const promise = new Promise((resolve, reject) => {
-        chrome.storage.local.get(["apiKey"], function (result) {
-          if (chrome.runtime.lastError) {
-            reject(new Error(chrome.runtime.lastError));
-          } else {
-            resolve(result.apiKey);
-          }
-        });
-      });
-
-      const apiKey = await promise;
-      if (apiKey) {
-        return apiKey;
-      }
-    } catch (error) {
-      console.error("Error when receiving OpenAI API Key:", error);
-      return "";
-    }
-  }
-  async function saveApiKey(apiKey) {
+  async function getTonePreference() {
     return new Promise((resolve, reject) => {
-      chrome.storage.local.set({ apiKey: apiKey }, () => {
+      chrome.storage.local.get(["userPreferredTone"], function (result) {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
         } else {
-          resolve();
+          resolve(result.userPreferredTone || "facile");
         }
       });
     });
   }
 
-  async function showKeyInput() {
-    keyInputContainer.style.display = "flex";
-    try {
-      const apiKey = await getApiKey();
-      openAIApiKey.value = apiKey || "";
-      openAIApiKey.focus();
-    } catch (error) {
-      openAIApiKey.value = "";
-    }
-  }
-
-  function hideKeyInput() {
-    keyInputContainer.style.display = "none";
-    openAIApiKey.value = "";
-  }
-
-  async function saveModelPreference(engine) {
+  async function saveTonePreference(tone) {
     return new Promise((resolve, reject) => {
-      chrome.storage.local.set({ userPreferredEngine: engine }, () => {
+      chrome.storage.local.set({ userPreferredTone: tone }, () => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
         } else {
@@ -656,37 +571,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  async function initializeModelSelect() {
+  async function initializeToneSelect() {
     try {
-      const modelPreference = await new Promise((resolve, reject) => {
-        chrome.storage.local.get(["userPreferredEngine"], function (result) {
-          if (chrome.runtime.lastError) {
-            reject(chrome.runtime.lastError);
-          } else {
-            resolve(result.userPreferredEngine || "gpt-3.5-turbo");
-          }
-        });
-      });
-
-      modelSelect.value = modelPreference;
-
-      hideKeyInput();
+      const tonePreference = await getTonePreference();
+      toneSelect.value = tonePreference;
     } catch (error) {
-      console.error("Ошибка при инициализации modelSelect:", error);
+      console.error("Errore nell'inizializzazione del tono:", error);
     }
   }
 
-  document
-    .getElementById("btnCloseInputContainer")
-    .addEventListener("click", async () => {
-      keyInputContainer.style.display = "none";
-
-      const apiKey = await getApiKey();
-      if (!apiKey && modelSelect.value === "gpt-4") {
-        modelSelect.value = "gpt-3.5-turbo";
-        await saveModelPreference("gpt-3.5-turbo");
-      }
-    });
+  toneSelect.addEventListener("change", async () => {
+    const selectedTone = toneSelect.value;
+    await saveTonePreference(selectedTone);
+  });
   // --------PopupClose---------------------
   btnPopupClose.addEventListener("click", function () {
     chrome.tts.stop();
