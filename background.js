@@ -440,13 +440,21 @@ async function sendSummary(pageContent, inputType, settings, tone) {
 
   const paywallInfo = await getPaywallInfoFromPopup();
 
+  const selectedTone = tone || settings.userPreferredTone || "facile";
+
+  const toneInstructions = {
+    facile: "Fornisci un riassunto semplice e facile da capire, usando un linguaggio chiaro e accessibile. Evita termini tecnici complessi e spiega i concetti in modo diretto, come se stessi parlando con qualcuno che non conosce l'argomento. Usa frasi brevi e concise.",
+    approfondito: "Fornisci un riassunto dettagliato e approfondito, includendo tutti i punti chiave e i dettagli importanti. Usa un linguaggio più tecnico e preciso, analizzando i concetti in profondità. Fornisci contesto e spiegazioni complete per ogni punto importante."
+  };
+
   let dataToSend = {
     content: pageContent,
     input_type: inputType,
     user: settings.uniqueUserID,
     engine: "gpt-3.5-turbo",
     length: settings.summaryLength,
-    tone: tone || settings.userPreferredTone || "facile",
+    tone: selectedTone,
+    tone_instruction: toneInstructions[selectedTone] || toneInstructions.facile,
   };
 
   if (settings.apiKey) {
