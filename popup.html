@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/styles/popup.css" rel="stylesheet" />
+    <title>Text Summarizer</title>
+  </head>
+  <body>
+    <div class="app">
+      <div id="ratingWrapper" class="rating__wrapper">
+        <div class="rating__text">
+          <p>Thank you for using our extension!</p>
+          <p>Please rate your experience.</p>
+        </div>
+        <div id="ratingBlock" class="rating__block">
+          <svg
+            data-rating="1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            class="rating-star"
+          >
+            <path
+              d="M12.5 1.61804L14.9432 9.13729L15.0554 9.48278H15.4187H23.3249L16.9286 14.1299L16.6347 14.3435L16.747 14.689L19.1902 22.2082L12.7939 17.5611L12.5 17.3475L12.2061 17.5611L5.80985 22.2082L8.253 14.689L8.36526 14.3435L8.07137 14.1299L1.67511 9.48278H9.58132H9.94459L10.0568 9.13729L12.5 1.61804Z"
+              fill="white"
+              stroke="#8E8E93"
+            />
+          </svg>
+
+          <svg
+            data-rating="2"
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            class="rating-star"
+          >
+            <path
+              d="M12.5 1.61804L14.9432 9.13729L15.0554 9.48278H15.4187H23.3249L16.9286 14.1299L16.6347 14.3435L16.747 14.689L19.1902 22.2082L12.7939 17.5611L12.5 17.3475L12.2061 17.5611L5.80985 22.2082L8.253 14.689L8.36526 14.3435L8.07137 14.1299L1.67511 9.48278H9.58132H9.94459L10.0568 9.13729L12.5 1.61804Z"
+              fill="white"
+              stroke="#8E8E93"
+            />
+          </svg>
+          <svg
+            data-rating="3"
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            class="rating-star"
+          >
+            <path
+              d="M12.5 1.61804L14.9432 9.13729L15.0554 9.48278H15.4187H23.3249L16.9286 14.1299L16.6347 14.3435L16.747 14.689L19.1902 22.2082L12.7939 17.5611L12.5 17.3475L12.2061 17.5611L5.80985 22.2082L8.253 14.689L8.36526 14.3435L8.07137 14.1299L1.67511 9.48278H9.58132H9.94459L10.0568 9.13729L12.5 1.61804Z"
+              fill="white"
+              stroke="#8E8E93"
+            />
+          </svg>
+          <svg
+            data-rating="4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            class="rating-star"
+          >
+            <path
+              d="M12.5 1.61804L14.9432 9.13729L15.0554 9.48278H15.4187H23.3249L16.9286 14.1299L16.6347 14.3435L16.747 14.689L19.1902 22.2082L12.7939 17.5611L12.5 17.3475L12.2061 17.5611L5.80985 22.2082L8.253 14.689L8.36526 14.3435L8.07137 14.1299L1.67511 9.48278H9.58132H9.94459L10.0568 9.13729L12.5 1.61804Z"
+              fill="white"
+              stroke="#8E8E93"
+            />
+          </svg>
+          <svg
+            data-rating="5"
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            class="rating-star"
+          >
+            <path
+              d="M12.5 1.61804L14.9432 9.13729L15.0554 9.48278H15.4187H23.3249L16.9286 14.1299L16.6347 14.3435L16.747 14.689L19.1902 22.2082L12.7939 17.5611L12.5 17.3475L12.2061 17.5611L5.80985 22.2082L8.253 14.689L8.36526 14.3435L8.07137 14.1299L1.67511 9.48278H9.58132H9.94459L10.0568 9.13729L12.5 1.61804Z"
+              fill="white"
+              stroke="#8E8E93"
+            />
+          </svg>
+        </div>
+        <button id="ratingLinkOpenBtn" class="rating__link-open-btn">ok</button>
+        <div id="ratingAnswerWrapper" class="rating-answer__wrapper">
+          <div
+            id="ratingNegativeAnswer"
+            class="rating__answer rating__negative"
+          >
+            We're sorry that you feel this way. Please detail the issue <br />
+            below to help us improve.
+            <a
+              id="ratingLinkToFeedbackForm"
+              class="rating__link-to-form"
+              href="https://docs.google.com/forms/d/1f-bMmpXa3DO-s18FJ71pfXATKwNs0U6SNAQEK7L5lsQ/edit"
+              target="_blank"
+              >Link to google form
+            </a>
+          </div>
+          <div
+            id="ratingPositiveAnswer"
+            class="rating__answer rating__positive"
+          >
+            We're glad that you liked it! Please leave a review in the Chrome
+            Store.
+            <a
+              id="ratingLinkToGoogleForm"
+              class="rating__link-to-form"
+              href="https://chrome.google.com/webstore/detail/краткий-пересказ-страницы/npifianbfjhobabjjpfdjjihgbdnbojh?hl=ru&authuser=0"
+              target="_blank"
+              >Link to Google Store
+            </a>
+          </div>
+        </div>
+        <button id="ratingCloseBtn" class="rating__close-btn">Not now</button>
+      </div>
+      <header class="header">
+        <div class="header__wrapper">
+          <span class="title">Text Summarizer</span>
+
+          <div class="header__buttons">
+            <div class="model-select__wrapper">
+              <select id="modelSelect" class="select-lang">
+                <option class="option" value="gpt-3.5-turbo" selected>
+                  GPT 3.5
+                </option>
+                <option class="option" value="gpt-4">GPT 4</option>
+              </select>
+            </div>
+            <div id="keyInputContainer" class="api-key__container">
+              <div class="api-key__title">
+                <p class="api-key-options__title">To use GPT 4:</p>
+                <button
+                  id="btnCloseInputContainer"
+                  class="input-container__btn-close"
+                >
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M32.543 30.3848L22.1531 20.0006L32.543 9.69285C33.0637 9.08979 33.0355 8.1848 32.4783 7.61578C31.9211 7.04676 31.0227 7.00555 30.4165 7.52119L19.9962 17.7525L9.75818 7.44472C9.16572 6.85176 8.20887 6.85176 7.6164 7.44472C7.32884 7.73188 7.16709 8.12277 7.16709 8.53055C7.16709 8.93833 7.32884 9.32922 7.6164 9.61638L17.8392 19.9088L7.44931 30.2013C7.16175 30.4884 7 30.8793 7 31.2871C7 31.6949 7.16175 32.0858 7.44931 32.3729C7.73598 32.6592 8.12405 32.8188 8.5278 32.8165C8.92414 32.8189 9.30572 32.6652 9.59109 32.3882L19.9962 22.0652L30.4165 32.5565C30.7031 32.8427 31.0912 33.0023 31.4949 33C31.8934 32.9983 32.2753 32.839 32.5582 32.5565C32.8438 32.2673 33.0028 31.8752 33 31.4674C32.9971 31.0597 32.8326 30.6699 32.543 30.3848Z"
+                      fill="#8E8E93"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="login-api-key">
+                <p class="api-key__text">
+                  1. Login to OpenAI
+                  <a
+                    href="https://platform.openai.com/api-keys"
+                    target="_blank"
+                    class="api-key__text api-key__text-link"
+                    >API key page</a
+                  >
+                </p>
+                <p class="api-key__text">
+                  2. Click "Create new secret key" button
+                </p>
+                <p class="api-key__text">3. Enter the generated key below</p>
+              </div>
+              <div class="input-key">
+                <input
+                  type="text"
+                  id="openAIApiKey"
+                  class="openai-api-key"
+                  placeholder="API Key"
+                />
+              </div>
+              <div class="api-key__save-wrapper">
+                <button id="saveKeyBtn" class="api-key__btn-save">
+                  Save API Key
+                </button>
+              </div>
+            </div>
+
+            <a
+              href="https://onlineapp.pro/paywall/581/customer-portal/get"
+              target="_blank"
+              title="Manage subscription"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                style="display: block"
+              >
+                <path
+                  d="M5.85 17.1C6.7 16.45 7.65 15.9375 8.7 15.5625C9.75 15.1875 10.85 15 12 15C13.15 15 14.25 15.1875 15.3 15.5625C16.35 15.9375 17.3 16.45 18.15 17.1C18.7333 16.4167 19.1875 15.6417 19.5125 14.775C19.8375 13.9083 20 12.9833 20 12C20 9.78333 19.2208 7.89583 17.6625 6.3375C16.1042 4.77917 14.2167 4 12 4C9.78333 4 7.89583 4.77917 6.3375 6.3375C4.77917 7.89583 4 9.78333 4 12C4 12.9833 4.1625 13.9083 4.4875 14.775C4.8125 15.6417 5.26667 16.4167 5.85 17.1ZM12 13C11.0167 13 10.1875 12.6625 9.5125 11.9875C8.8375 11.3125 8.5 10.4833 8.5 9.5C8.5 8.51667 8.8375 7.6875 9.5125 7.0125C10.1875 6.3375 11.0167 6 12 6C12.9833 6 13.8125 6.3375 14.4875 7.0125C15.1625 7.6875 15.5 8.51667 15.5 9.5C15.5 10.4833 15.1625 11.3125 14.4875 11.9875C13.8125 12.6625 12.9833 13 12 13ZM12 22C10.6167 22 9.31667 21.7375 8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22Z"
+                  fill="white"
+                />
+              </svg>
+            </a>
+
+            <div class="btn-close__wrapper">
+              <button id="btnPopupClose" class="popup-close">
+                <svg
+                  id="btnPopupCloseSVG"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="btnPopupCloseVector"
+                    d="M17.6836 16.1895L10.4906 9.00041L17.6836 1.86428C18.0441 1.44678 18.0246 0.820247 17.6388 0.426311C17.2531 0.0323745 16.6311 0.00384066 16.2114 0.360822L8.99735 7.44401L1.90951 0.307884C1.49934 -0.102628 0.836908 -0.102628 0.426741 0.307884C0.227658 0.506686 0.115677 0.777304 0.115677 1.05961C0.115677 1.34192 0.227658 1.61254 0.426741 1.81134L7.50407 8.93688L0.311064 16.0624C0.111981 16.2612 0 16.5318 0 16.8142C0 17.0965 0.111981 17.3671 0.311064 17.5659C0.509522 17.7641 0.778186 17.8746 1.05771 17.8729C1.3321 17.8746 1.59627 17.7682 1.79383 17.5765L8.99735 10.4298L16.2114 17.6929C16.4098 17.8911 16.6785 18.0016 16.958 18C17.2339 17.9988 17.4983 17.8885 17.6942 17.6929C17.8919 17.4927 18.0019 17.2213 18 16.939C17.998 16.6567 17.8841 16.3869 17.6836 16.1895Z"
+                    fill="#FDF2F8"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div id="progress" class="progress">
+        <div id="preloader" class="preloader">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="60"
+            height="60"
+            viewBox="0 0 60 60"
+            fill="none"
+          >
+            <path
+              d="M50 10V20L30 20C27.2526 20 24.9023 20.9766 22.9492 22.9297C20.9831 24.8828 20 27.2396 20 30H10C10 24.4792 11.9596 19.7656 15.8789 15.8594C19.7852 11.9531 24.4922 10 30 10H50ZM50 30C50 35.5078 48.0469 40.2148 44.1406 44.1211C40.2344 48.0404 35.5208 50 30 50L10 50V40L30 40C32.7604 40 35.1172 39.0169 37.0703 37.0508C39.0234 35.0977 40 32.7474 40 30H50Z"
+              fill="#15A7C5"
+            />
+          </svg>
+        </div>
+        <div id="progressBar" class="progress-bar">
+          <div id="progressLine" class="progress-line"></div>
+        </div>
+      </div>
+      <main class="main">
+        <section id="section-article" class="section-article">
+          <form>
+            <textarea
+              id="section-article__input"
+              placeholder="   Input text"
+              class="section-article__input"
+            ></textarea>
+            <button id="btnClearArticle" class="section-article__btn-clear">
+              <svg
+                id="svg-input-clear"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  id="btnClearArticleVector"
+                  d="M14.7891 13.793L9.99376 9.00027L14.7891 4.24285C15.0294 3.96452 15.0164 3.54683 14.7592 3.28421C14.5021 3.02158 14.0874 3.00256 13.8076 3.24055L8.99824 7.96268L4.27301 3.20526C3.99956 2.93158 3.55794 2.93158 3.28449 3.20526C3.15177 3.33779 3.07712 3.5182 3.07712 3.70641C3.07712 3.89461 3.15177 4.07503 3.28449 4.20756L8.00271 8.95792L3.20738 13.7083C3.07465 13.8408 3 14.0212 3 14.2094C3 14.3976 3.07465 14.5781 3.20738 14.7106C3.33968 14.8427 3.51879 14.9164 3.70514 14.9153C3.88807 14.9164 4.06418 14.8455 4.19589 14.7176L8.99824 9.95317L13.8076 14.7953C13.9399 14.9274 14.119 15.0011 14.3054 15C14.4893 14.9992 14.6655 14.9257 14.7961 14.7953C14.9279 14.6618 15.0013 14.4809 15 14.2927C14.9987 14.1045 14.9227 13.9246 14.7891 13.793Z"
+                  fill="#1485A6"
+                />
+              </svg>
+            </button>
+            <button
+              id="btnArticleSubmit"
+              type="submit"
+              class="section-article__btn-submit"
+            >
+              <svg
+                id="input-submit-svg"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  id="input-submit--vector"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M9.4512 2.06359C9.83463 1.71212 10.4563 1.71212 10.8397 2.06359L17.7124 8.36359C18.0959 8.71506 18.0959 9.28491 17.7124 9.63638L10.8397 15.9364C10.4563 16.2879 9.83463 16.2879 9.4512 15.9364C9.06778 15.5849 9.06778 15.0151 9.4512 14.6636L14.6479 9.89999H0.981818C0.439575 9.89999 0 9.49704 0 8.99999C0 8.50293 0.439575 8.09999 0.981818 8.09999H14.6479L9.4512 3.33638C9.06778 2.98491 9.06778 2.41506 9.4512 2.06359Z"
+                  fill="#EDFDFE"
+                />
+              </svg>
+            </button>
+          </form>
+        </section>
+      </main>
+      <section id="section-summary" class="section section-summary">
+        <div id="summaryOutput" class="section-summary__output">
+          <div id="summaryTextarea" class="summary__textarea"></div>
+        </div>
+        <button id="btnClearSummary" class="section-summary__button-clear">
+          <svg
+            id="svgSummaryClear"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="clearSummary">
+              <path
+                id="Icon"
+                d="M15.9467 14.7516L10.1923 9.00032L15.9467 3.29141C16.2351 2.95741 16.2195 2.45619 15.9109 2.14104C15.6023 1.82589 15.1047 1.80306 14.7689 2.08865L8.99769 7.7552L3.32741 2.04629C2.99928 1.71789 2.46933 1.71789 2.1412 2.04629C1.98193 2.20534 1.89235 2.42183 1.89235 2.64768C1.89235 2.87352 1.98193 3.09002 2.1412 3.24906L7.80306 8.9495L2.04866 14.6499C1.88939 14.809 1.7998 15.0255 1.7998 15.2513C1.7998 15.4772 1.88939 15.6937 2.04866 15.8527C2.20742 16.0112 2.42235 16.0996 2.64597 16.0983C2.86548 16.0997 3.07682 16.0145 3.23487 15.8612L8.99769 10.1438L14.7689 15.9543C14.9277 16.1129 15.1426 16.2013 15.3662 16.2C15.5869 16.199 15.7984 16.1108 15.9551 15.9543C16.1133 15.7942 16.2014 15.577 16.1998 15.3512C16.1982 15.1253 16.1071 14.9095 15.9467 14.7516Z"
+                fill="#EDFDFE"
+              />
+            </g>
+          </svg>
+        </button>
+      </section>
+      <section id="sectionButtons" class="section section-buttons">
+        <p id="pretextOr" class="p-or">or</p>
+        <button id="getSummary" class="button__summary-page">
+          Summarize this page
+        </button>
+      </section>
+      <button id="btnSummaryStop" class="section-summary__button-stop">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+        >
+          <rect width="18" height="18" rx="4" fill="#EDFDFE" />
+        </svg>
+        Stop summary
+      </button>
+      <section
+        id="sectionFunctionalityButtons"
+        class="section-functionality__buttons"
+      >
+        <div class="functionality-translate__wrapper">
+          <span class="language-select__text">Translate to </span>
+          <select id="language-select" class="language-select">
+            <option value="default" selected>Language</option>
+            <option value="ar">Arabic</option>
+            <option value="am">Amharic</option>
+            <option value="bg">Bulgarian</option>
+            <option value="bn">Bengali</option>
+            <option value="ca">Catalan</option>
+            <option value="cs">Czech</option>
+            <option value="da">Danish</option>
+            <option value="de">German</option>
+            <option value="el">Greek</option>
+            <option value="en">English</option>
+            <option value="en-AU">English (Australia)</option>
+            <option value="en-GB">English (Great Britain)</option>
+            <option value="en-US">English (USA)</option>
+            <option value="es">Spanish</option>
+            <option value="es-419">
+              Spanish (Latin America and Caribbean)
+            </option>
+            <option value="et">Estonian</option>
+            <option value="fa">Persian</option>
+            <option value="fi">Finnish</option>
+            <option value="fil">Filipino</option>
+            <option value="fr">French</option>
+            <option value="gu">Gujarati</option>
+            <option value="he">Hebrew</option>
+            <option value="hi">Hindi</option>
+            <option value="hr">Croatian</option>
+            <option value="hu">Hungarian</option>
+            <option value="id">Indonesian</option>
+            <option value="it">Italian</option>
+            <option value="ja">Japanese</option>
+            <option value="kn">Kannada</option>
+            <option value="ko">Korean</option>
+            <option value="lt">Lithuanian</option>
+            <option value="lv">Latvian</option>
+            <option value="ml">Malayalam</option>
+            <option value="mr">Marathi</option>
+            <option value="ms">Malay</option>
+            <option value="nl">Dutch</option>
+            <option value="no">Norwegian</option>
+            <option value="pl">Polish</option>
+            <option value="pt-BR">Portuguese (Brazil)</option>
+            <option value="pt-PT">Portuguese (Portugal)</option>
+            <option value="ro">Romanian</option>
+            <option value="ru">Russian</option>
+            <option value="sk">Slovak</option>
+            <option value="sl">Slovenian</option>
+            <option value="sr">Serbian</option>
+            <option value="sv">Swedish</option>
+            <option value="sw">Swahili</option>
+            <option value="ta">Tamil</option>
+            <option value="te">Telugu</option>
+            <option value="th">Thai</option>
+            <option value="tr">Turkish</option>
+            <option value="uk">Ukrainian</option>
+            <option value="vi">Vietnamese</option>
+            <option value="zh-CN">Chinese (China)</option>
+            <option value="zh-TW">Chinese (Taiwan)</option>
+          </select>
+        </div>
+        <div class="functionality-buttons__wrapper">
+          <div class="text-size__wrapper">
+            <button
+              id="section-summary__button-minus"
+              class="section-summary__button-minus"
+              data-tooltip="Zoom out."
+              data-tooltip-pos="left"
+            >
+              <svg
+                id="decreaseBtn"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.59961 9H14.3996"
+                  stroke="#EDFDFE"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <div id="summary-text-resize" class="summary-resize">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  id="A"
+                  d="M8.20963 14.8205H3.75637L3.04249 18H0L4.31728 0H7.68272L12 18H8.92351L8.20963 14.8205ZM7.46176 11.4359L5.983 4.84615L4.52125 11.4359H7.46176Z"
+                  fill="#15A7C5"
+                />
+                <path
+                  id="Icon"
+                  d="M14.9097 2.92247L12.6209 5.62402C12.4434 5.83357 12.4447 6.17488 12.6239 6.38634C12.803 6.5978 13.0922 6.59935 13.2697 6.3898L14.7227 4.67477L14.7668 16.1604L13.2401 14.3583C13.0609 14.1468 12.7717 14.1452 12.5942 14.3548C12.4167 14.5644 12.418 14.9057 12.5971 15.1171L14.9068 17.8433C15.0872 18.0509 15.3737 18.0524 15.5526 17.8467L17.8414 15.1452C18.0189 14.9356 18.0176 14.5943 17.8384 14.3829C17.6593 14.1714 17.3701 14.1699 17.1926 14.3794L15.6796 16.1653L15.6349 4.53736L17.2222 6.41096C17.4014 6.62243 17.6905 6.62398 17.8681 6.41442C18.0456 6.20487 18.0443 5.86357 17.8651 5.6521L15.5555 2.92593C15.375 2.71834 15.0886 2.71681 14.9097 2.92247Z"
+                  fill="#15A7C5"
+                />
+              </svg>
+            </div>
+            <button
+              id="section-summary__button-plus"
+              class="section-summary__button-plus"
+              data-tooltip="Zoom in."
+            >
+              <svg
+                id="increaseBtn"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 3.59998V14.4"
+                  stroke="#EDFDFE"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.59961 9H14.3996"
+                  stroke="#EDFDFE"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="btn-audio__wrapper">
+            <button
+              id="btnAudio"
+              class="button-audio button-audio-stopped"
+              data-tooltip="Text to speech"
+            ></button>
+            <button
+              id="btnCopySummary"
+              class="section-summary__button-copy"
+              data-tooltip="Copy text."
+              data-tooltip-pos="right"
+            >
+              <svg
+                id="svgBtnCopySummary"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="Copy">
+                  <path
+                    d="M0 3.64557C0 1.63218 1.63218 0 3.64557 0H10.9367C12.9501 0 14.5823 1.63218 14.5823 3.64557V10.9367C14.5823 12.9501 12.9501 14.5823 10.9367 14.5823H3.64557C1.63218 14.5823 0 12.9501 0 10.9367V3.64557Z"
+                    fill="#EDFDFE"
+                  />
+                  <path
+                    d="M13.6709 18H6.37975C6.00077 17.995 5.69617 17.6864 5.6962 17.3073C5.70119 16.9334 6.00577 16.6329 6.37975 16.6329H13.6709C14.458 16.6329 15.2128 16.3196 15.7686 15.7621C16.3243 15.2047 16.6353 14.4489 16.6329 13.6618V6.37063C16.6329 5.99312 16.9389 5.68709 17.3165 5.68709C17.694 5.68709 18 5.99312 18 6.37063V13.6618C18 16.0542 16.0633 17.995 13.6709 18Z"
+                    fill="#EDFDFE"
+                  />
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section id="summaryLengthSection" class="summary-length__section">
+        <div id="summaryLengthLabel" class="summary-length__label">
+          <p id="summaryLengthText" class="summary-length__text">
+            Number of sentences:
+          </p>
+        </div>
+        <div class="summary-length__setting">
+          <input
+            type="range"
+            id="summaryLengthRange"
+            min="3"
+            max="9"
+            value="5"
+            step="1"
+          />
+          <span id="rangeValue" class="range-value"></span>
+          <!-- Элемент для отображения значения -->
+          <div class="slider-svg-container">
+            <svg
+              width="240"
+              height="32"
+              viewBox="0 0 240 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect y="12" width="240" height="8" rx="4" fill="#E6E0E9" />
+              <circle cx="6" cy="16" r="4" fill="#1C1C1E" />
+              <circle cx="44" cy="16" r="4" fill="#1C1C1E" />
+              <circle cx="82" cy="16" r="4" fill="#1C1C1E" />
+              <circle cx="120" cy="16" r="4" fill="#1C1C1E" />
+              <circle cx="158" cy="16" r="4" fill="#1C1C1E" />
+              <circle cx="196" cy="16" r="4" fill="#1C1C1E" />
+              <circle cx="234" cy="16" r="4" fill="#1C1C1E" />
+            </svg>
+          </div>
+        </div>
+      </section>
+      <a href="mailto:sup@text-summarizer.help" class="support-mail">
+        Support: sup@text-summarizer.help
+      </a>
+    </div>
+    <script src="wall.2.0.3.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

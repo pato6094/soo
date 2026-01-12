@@ -1,0 +1,33 @@
+{
+   "action": {
+      "default_icon": {
+         "48": "icons/48icon.png"
+      },
+      "default_popup": "./popup.html"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "default_locale": "en",
+   "description": "__MSG_shortDesc__",
+   "externally_connectable": {
+      "matches": [ "https://onlineapp.pro/*", "https://onlineapp.stream/*", "https://onlineapp.live/*" ]
+   },
+   "host_permissions": [ "ws://158.160.66.115:40000/summary", "http://158.160.66.115:40000/get_summary" ],
+   "icons": {
+      "128": "icons/128icon.png",
+      "16": "icons/16icon.png",
+      "48": "icons/48icon.png",
+      "96": "icons/96icon.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh4fuMWsPsdLFhIRgW4CCds2DxW4J4LaiiJvdURqAYkRqpdIQMg/mFAsJPChcHDUinpptO/NHWaHcTSHym06NfUX7F8VOIQmiqIraN4w01ZP4I9iLPrxvn7JXYoX7eCv79CWjLOsjsjNJD9JEjxvGgkKgtgmG7/U6L+DXVgQ3FNRGnHAkQACgmpPvNxVq1kfFrTDRoRO/HmUPiP5FooXtXVG2qMmC6LcI1VE+F7wz0BeLqolF1Yq9NYY9la7IlWADSmFZnGh6HNYS+XgYvg2hgSF3WRJG3S5W3Dil2vDuYGbT9vYM9aV4DluXUEsGYGDmtzp5UhZyR9tuPDc9Ss+YdwIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_appName__",
+   "permissions": [ "tabs", "tts", "activeTab", "storage", "scripting" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.1.1",
+   "web_accessible_resources": [ {
+      "matches": [ "https://*/*", "http://*/*" ],
+      "resources": [ "fonts/*.woff2", "fonts/*.woff", "wall.2.0.3.js" ]
+   } ]
+}
